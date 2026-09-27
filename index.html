@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SQIsign2D² 是基于超奇异椭圆曲线同源与自同态环困难问题的后量子数字签名方案。">
+  <title>SQIsign2D² — 后量子数字签名方案</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script defer src="assets/site.js"></script>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="返回首页">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span><b>SQIsign2D²</b><small>POST-QUANTUM CRYPTOGRAPHY</small></span>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav">菜单</button>
+    <nav id="primary-nav" class="primary-nav" aria-label="主导航">
+      <a data-nav="home" href="index.html">概览</a>
+      <a data-nav="scheme" href="scheme.html">方案</a>
+      <a data-nav="parameters" href="parameters.html">参数与性能</a>
+      <a data-nav="implementation" href="implementation.html">实现与资源</a>
+      <a data-nav="responses" href="responses.html">公开回应</a>
+      <a data-nav="team" href="team.html">团队</a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div class="eyebrow"><span>下一代商用密码算法征集 · 数字签名</span><span>规范版本 1.0</span></div>
+      <div class="hero-layout">
+        <div>
+          <p class="kicker">数字签名 · 基于超奇异同源</p>
+          <h1>SQIsign2D²</h1>
+          <p class="lead">以超奇异椭圆曲线同源和自同态环困难问题为安全基础，通过二维同源构造在后量子安全目标下提供紧凑的公钥与签名。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="implementation.html#downloads">下载规范与代码</a>
+            <a class="button ghost" href="parameters.html">查看参数与性能</a>
+          </div>
+        </div>
+        <aside class="status-panel" aria-label="方案状态">
+          <p class="panel-label">CURRENT SNAPSHOT</p>
+          <dl>
+            <div><dt>原语类型</dt><dd>数字签名</dd></div>
+            <div><dt>安全等级</dt><dd>Level 1 / 2 / 3 / 5</dd></div>
+            <div><dt>基础困难问题</dt><dd>超奇异同源路径与自同态环计算</dd></div>
+            <div><dt>最新版本</dt><dd>算法规范 v1.0</dd></div>
+          </dl>
+          <p class="status-note"><span></span>材料状态：规范、参考实现、优化实现与 KAT 已随提交材料提供</p>
+        </aside>
+      </div>
+    </section>
+    <section class="section intro-grid">
+      <div><p class="section-index">01 / 核心定位</p><h2>算法简介</h2></div>
+      <div class="prose">
+        <p>SQIsign2D² 是 SQIsign2D 系列的后量子数字签名方案。方案把基于 Σ 协议的身份认证流程经 Fiat-Shamir 变换转化为非交互签名，并使用形如 p = f·2ᵃ·3ᵇ−1 的结构化素数，使 2-幂与 3-幂同源都能高效参与计算。其设计重点是在保持极小公钥和签名尺寸的同时，降低密钥生成和签名阶段的高维同源计算成本。</p>
+        <p>本站内容依据 2026 年 4 月 26 日的 v1.0 算法规范、补充安全等级说明、提交人基础信息、知识产权声明、C 语言实现及已知答案测试向量整理。</p>
+      </div>
+    </section>
+    <section class="section feature-band">
+      <p class="section-index light">02 / 主要内容</p>
+      <div class="feature-grid">
+        <a href="scheme.html"><span>01</span><h3>方案设计</h3><p>构造思路、数学基础、安全模型与设计取舍。</p></a>
+        <a href="parameters.html"><span>02</span><h3>参数与性能</h3><p>8 个参数实例、密钥及签名尺寸与基准数据。</p></a>
+        <a href="implementation.html"><span>03</span><h3>规范与实现</h3><p>规范文本、参考/优化代码与 16 份测试向量。</p></a>
+        <a href="responses.html"><span>04</span><h3>公开回应</h3><p>集中登记公开问题、正式回应及勘误状态。</p></a>
+      </div>
+    </section>
+    <section class="section metrics-section">
+      <div class="section-heading"><div><p class="section-index">03 / 一览</p><h2>关键指标</h2></div><a class="text-link" href="parameters.html">查看完整参数与测试条件 →</a></div>
+      <div class="metric-grid">
+        <article><small>PUBLIC KEY</small><strong>81 B</strong><span>Level2-eff · 压缩格式</span></article>
+        <article><small>SECRET KEY</small><strong>298 B</strong><span>Level2-eff · 压缩格式</span></article>
+        <article><small>SIGNATURE</small><strong>208 B</strong><span>Level2-eff · 压缩格式</span></article>
+        <article><small>SECURITY</small><strong>Level 2</strong><span>约 128-bit 经典 / 80-bit 量子目标类别</span></article>
+      </div>
+      <p class="fineprint">尺寸取自规范表 6.1 的 Level2-eff 压缩格式；安全类别按补充说明解释。完整页面同时列出各参数集的具体安全估算与测试条件。</p>
+    </section>
+    <section class="section update-section">
+      <div class="section-heading"><div><p class="section-index">04 / 材料时间线</p><h2>版本与公告</h2></div></div>
+      <ol class="timeline">
+        <li><time>2026-09-27</time><div><h3>离线资料站完成内容整理</h3><p>依据提交目录中的规范、实现和测试向量补全算法页面，并保留材料原始下载入口。</p></div></li>
+        <li><time>2026-04-26</time><div><h3>算法规范 v1.0</h3><p>发布 SQIsign2D² 算法规范与支持文档，覆盖构造、参数、实现、性能和安全分析。</p></div></li>
+        <li><time>2026-04-20</time><div><h3>提交人基础信息与声明</h3><p>8 名联合提交人完成基础信息及相关知识产权声明。</p></div></li>
+      </ol>
+    </section>
+  </main>
+  <footer class="site-footer"><div><b>SQIsign2D²</b><p>联合提交团队 · 合肥国家实验室 / 中国科学技术大学 / 兴唐通信科技有限公司</p></div><div><p>联系：xuzheng1@mail.ustc.edu.cn</p><p>最后更新：2026-09-27</p></div></footer>
+</body>
+</html>
