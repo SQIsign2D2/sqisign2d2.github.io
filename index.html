@@ -47,7 +47,7 @@
             <div><dt>基础困难问题</dt><dd>超奇异同源路径与自同态环计算</dd></div>
             <div><dt>最新版本</dt><dd>算法规范 v1.0</dd></div>
           </dl>
-          <p class="status-note"><span></span>材料状态：规范、参考实现、优化实现与 KAT 已随提交材料提供</p>
+          <p class="status-note"><span></span>材料状态：规范、实现、KAT 与 2 项安全修订回复已登记</p>
         </aside>
       </div>
     </section>
@@ -55,7 +55,7 @@
       <div><p class="section-index">01 / 核心定位</p><h2>算法简介</h2></div>
       <div class="prose">
         <p>SQIsign2D² 是 SQIsign2D 系列的后量子数字签名方案。方案把基于 Σ 协议的身份认证流程经 Fiat-Shamir 变换转化为非交互签名，并使用形如 p = f·2ᵃ·3ᵇ−1 的结构化素数，使 2-幂与 3-幂同源都能高效参与计算。其设计重点是在保持极小公钥和签名尺寸的同时，降低密钥生成和签名阶段的高维同源计算成本。</p>
-        <p>本站内容依据 2026 年 4 月 26 日的 v1.0 算法规范、补充安全等级说明、提交人基础信息、知识产权声明、C 语言实现及已知答案测试向量整理。</p>
+        <p>本站内容依据 2026 年 4 月 26 日的 v1.0 算法规范、补充安全等级说明、提交人基础信息、知识产权声明、C 语言实现、已知答案测试向量及现有修订回复材料整理。</p>
       </div>
     </section>
     <section class="section feature-band">
@@ -64,7 +64,7 @@
         <a href="scheme.html"><span>01</span><h3>方案设计</h3><p>构造思路、数学基础、安全模型与设计取舍。</p></a>
         <a href="parameters.html"><span>02</span><h3>参数与性能</h3><p>8 个参数实例、密钥及签名尺寸与基准数据。</p></a>
         <a href="implementation.html"><span>03</span><h3>规范与实现</h3><p>规范文本、参考/优化代码与 16 份测试向量。</p></a>
-        <a href="responses.html"><span>04</span><h3>公开回应</h3><p>集中登记公开问题、正式回应及勘误状态。</p></a>
+        <a href="responses.html"><span>04</span><h3>公开回应</h3><p>已登记 sign-25-1 与 sign-25-3 的确认结论、修订措施及勘误状态。</p></a>
       </div>
     </section>
     <section class="section metrics-section">
@@ -80,12 +80,13 @@
     <section class="section update-section">
       <div class="section-heading"><div><p class="section-index">04 / 材料时间线</p><h2>版本与公告</h2></div></div>
       <ol class="timeline">
+        <li><time>2026-11-25</time><div><h3>登记两项安全修订回复</h3><p>依据现有修订回复材料，整理 sign-25-1 与 sign-25-3 的问题原因、影响范围、修订措施和勘误状态；正式发布日期及对应代码版本尚待补充。</p></div></li>
         <li><time>2026-09-27</time><div><h3>离线资料站完成内容整理</h3><p>依据提交目录中的规范、实现和测试向量补全算法页面，并保留材料原始下载入口。</p></div></li>
         <li><time>2026-04-26</time><div><h3>算法规范 v1.0</h3><p>发布 SQIsign2D² 算法规范与支持文档，覆盖构造、参数、实现、性能和安全分析。</p></div></li>
         <li><time>2026-04-20</time><div><h3>提交人基础信息与声明</h3><p>8 名联合提交人完成基础信息及相关知识产权声明。</p></div></li>
       </ol>
     </section>
   </main>
-  <footer class="site-footer"><div><b>SQIsign2D²</b><p>联合提交团队 · 合肥国家实验室 / 中国科学技术大学 / 兴唐通信科技有限公司</p></div><div><p>联系：xuzheng1@mail.ustc.edu.cn</p><p>最后更新：2026-09-27</p></div></footer>
+  <footer class="site-footer"><div><b>SQIsign2D²</b><p>联合提交团队 · 合肥国家实验室 / 中国科学技术大学 / 兴唐通信科技有限公司</p></div><div><p>联系：xuzheng1@mail.ustc.edu.cn</p><p>最后更新：2026-11-25</p></div></footer>
 </body>
 </html>
