@@ -1,50 +1,49 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="SQIsign2D² 的公开技术回应与勘误登记页。"><title>公开回应 — SQIsign2D²</title><link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="stylesheet" href="assets/styles.css"><script defer src="assets/site.js"></script></head>
 <body data-page="responses"><a class="skip-link" href="#main">跳到正文</a><header class="site-header"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span><b>SQIsign2D²</b><small>POST-QUANTUM CRYPTOGRAPHY</small></span></a><button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav">菜单</button><nav id="primary-nav" class="primary-nav" aria-label="主导航"><a data-nav="home" href="index.html">概览</a><a data-nav="scheme" href="scheme.html">方案</a><a data-nav="parameters" href="parameters.html">参数与性能</a><a data-nav="implementation" href="implementation.html">实现与资源</a><a data-nav="responses" href="responses.html">公开回应</a><a data-nav="team" href="team.html">团队</a></nav></header>
-<main id="main"><header class="page-hero"><p class="kicker">PUBLIC RESPONSES / ERRATA</p><h1>公开回应</h1><p>集中记录对算法设计、安全论证、参数选择和工程实现相关问题的正式回应，并保留可核验的版本轨迹。</p></header><div class="wide-article">
-<section class="response-policy"><p class="section-index">说明</p><h2>回应原则</h2><p>仅收录能够明确定位到规范版本、代码文件、测试向量或可复现实验的问题。团队在完成技术核验后发布回应，并同步记录受影响版本、证据材料、处置结果和必要的规范或实现变更；未经核验的推测不会作为正式结论发布。</p><div class="policy-meta"><span>内容负责人：SQIsign2D² 联合提交团队</span><span>联系：xuzheng1@mail.ustc.edu.cn</span><span>材料状态：已登记 2 项修订回复</span></div></section>
+<main id="main"><header class="page-hero"><p class="kicker">PUBLIC RESPONSES / ERRATA</p><h1>公开回应</h1><p>集中记录对算法设计、安全论证、参数选择和工程实现相关问题的正式回应，并保留可核验的版本轨迹。</p></header><div class="wide-article" lang="en">
+<section class="response-policy"><p class="section-index">SOURCE NOTE</p><h2>Material scope</h2><p>The supplied document contains responses to sign-25-1 and sign-25-3. It does not state the affected release, patched release, commit hash, or formal publication date, and it does not include the corresponding patched source code.</p><div class="policy-meta"><span>Maintainer: SQIsign2D² joint submission team</span><span>Contact: xuzheng1@mail.ustc.edu.cn</span><span>Material status: 2 confirmed and fixed issues</span></div></section>
 <section>
-  <div class="section-heading"><div><p class="section-index">01</p><h2>回应记录</h2></div></div>
-  <label class="filter-label" for="response-filter">筛选状态
+  <div class="section-heading"><div><p class="section-index">01</p><h2>Response records</h2></div></div>
+  <label class="filter-label" for="response-filter">Filter by status
     <select id="response-filter">
-      <option value="all">全部</option>
-      <option value="updated">已确认并修订</option>
+      <option value="all">All</option>
+      <option value="updated">Confirmed and fixed</option>
     </select>
   </label>
   <div class="response-list">
     <details data-status="updated" open>
-      <summary><span class="response-state updated">已修订</span><b>sign-25-1：验证结果可能受残留栈内容影响</b><time>材料日期未注明</time></summary>
+      <summary><span class="response-state updated">Fixed</span><b>sign-25-1: Verifier verdict is decided by stale stack contents</b><time>Date not stated</time></summary>
       <div>
-        <p>修订回复确认该问题存在。问题位于未压缩签名的验证路径，是局部实现缺陷，不需要修改签名方案或签名编码。</p>
+        <p lang="en">This response concerns report <strong>sign-25-1: Verifier verdict is decided by stale stack contents.</strong></p>
         <dl>
-          <dt>问题编号</dt><dd>sign-25-1</dd>
-          <dt>原始标题</dt><dd>Verifier verdict is decided by stale stack contents</dd>
-          <dt>根本原因</dt><dd>某些畸形签名会使二维同源链无法产生有效的分裂余域。相关有效性条件部分仅由发布构建中会被 <code>NDEBUG</code> 禁用的断言检查，同时失败状态没有显式传递给验证器，验证过程因而可能继续使用未完整写入的余域数据。</dd>
-          <dt>修订措施</dt><dd><ul><li>二维同源链计算显式返回成功或失败状态。</li><li>仅在最终分裂步骤成功后生成并使用余域数据。</li><li>验证器检查返回状态，计算失败时立即拒绝签名。</li><li>基恢复和曲线点检查改为无条件运行时检查，不再依赖调试断言。</li><li>畸形输入的失败路径不再继续使用不完整的中间值。</li></ul></dd>
-          <dt>修订结果</dt><dd>修订回复说明，验证结果现仅由公钥、消息和签名决定；有效签名仍可通过验证，全零签名、其他消息对应的签名以及导致同源链失败的畸形签名会被一致拒绝。</dd>
-          <dt>版本信息</dt><dd>当前材料未注明受影响版本、修订版本、代码提交或正式发布日期。</dd>
-          <dt>原始材料</dt><dd><a href="修订回复.docx" download>下载修订回复文档</a></dd>
+          <dt>Confirmation</dt><dd>We confirm the reported issue.</dd>
+          <dt>Root cause</dt><dd>The issue was caused by incomplete failure handling in the uncompressed verification path. For certain malformed signatures, the dimension-two isogeny chain could fail to produce a valid split codomain. Some of the relevant validity conditions were enforced only through assert statements, which are disabled in release builds when <code>NDEBUG</code> is defined. In addition, the failure status was not propagated explicitly to the verifier. As a result, verification could continue using a partially written codomain, and the final result could depend on residual stack contents from an earlier invocation.</dd>
+          <dt>Scope</dt><dd>This was a localized implementation issue and did not require any change to the signature scheme or signature encoding. The remediation was therefore relatively straightforward.</dd>
+          <dt>Remediation</dt><dd><p>We have fixed the reported issue by making following changes:</p><ul><li>The dimension-two isogeny-chain computation now returns an explicit success or failure status.</li><li>Codomain data are produced and used only when the final splitting step succeeds.</li><li>The verifier checks the returned status and immediately rejects the signature if the computation fails.</li><li>Necessary basis-recovery and point-on-curve conditions are now enforced by unconditional runtime checks rather than debug-only assertions.</li><li>Malformed-input failure paths were revised so that verification never continues with incomplete intermediate values.</li></ul></dd>
+          <dt>Outcome</dt><dd>After these changes, the verification result is determined solely by the public key, message, and signature. Valid signatures continue to verify correctly, while all-zero signatures, signatures for a different message, and malformed signatures that cause the isogeny-chain computation to fail are consistently rejected.</dd>
+          <dt>Version information</dt><dd>The supplied material does not state the affected version, patched version, commit hash, or formal publication date.</dd>
+          <dt>Source material</dt><dd><a href="修订回复.docx" download>Download the revision-response document</a></dd>
         </dl>
       </div>
     </details>
     <details data-status="updated">
-      <summary><span class="response-state updated">已修订</span><b>sign-25-3：独立紧凑挑战可导致单次查询消息重定向伪造</b><time>材料日期未注明</time></summary>
+      <summary><span class="response-state updated">Fixed</span><b>sign-25-3: Detached compact challenge enables one-query message-retargeting forgeries</b><time>Date not stated</time></summary>
       <div>
-        <p>修订回复确认该问题存在。修订涉及紧凑签名格式以及签名、验证两侧的协调修改，属于中等规模的实现变更。</p>
+        <p lang="en">This response concerns report <strong>sign-25-3: Detached compact challenge enables one-query message-retargeting forgeries.</strong></p>
         <dl>
-          <dt>问题编号</dt><dd>sign-25-3</dd>
-          <dt>原始标题</dt><dd>Detached compact challenge enables one-query message-retargeting forgeries</dd>
-          <dt>根本原因</dt><dd>原紧凑签名实现把散列导出的挑战作为相对独立的签名字段传输和检查，但验证器没有充分约束该值与重建的正向挑战同源及编码的对偶路径之间的几何关系，响应和对偶路径数据因而可能在挑战针对另一消息重新计算后保持不变。</dd>
-          <dt>修订措施</dt><dd><ul><li>紧凑签名不再携带独立的散列挑战值。</li><li>签名时使用规范基，由公钥、消息和承诺曲线的散列直接构造挑战核。</li><li>紧凑编码加入验证时重建承诺曲线和挑战关系所需的辅助信息。</li><li>验证时从响应和编码的对偶路径信息重建承诺曲线。</li><li>验证器针对待验证消息重新计算挑战、构造正向挑战核，并检查其与恢复的对偶挑战路径是否兼容。</li></ul></dd>
-          <dt>修订结果</dt><dd>消息、承诺曲线、正向挑战核和对偶挑战路径被绑定在同一验证关系中；仅更换消息或挑战值而不更新相关几何数据，不能再产生有效签名。</dd>
-          <dt>兼容性</dt><dd>材料明确说明紧凑签名格式已经更新，但未给出新格式版本号、修订后的签名尺寸或迁移方式。</dd>
-          <dt>版本信息</dt><dd>当前材料未注明受影响版本、修订版本、代码提交或正式发布日期。</dd>
-          <dt>原始材料</dt><dd><a href="修订回复.docx" download>下载修订回复文档</a></dd>
+          <dt>Confirmation</dt><dd>We confirm the reported issue.</dd>
+          <dt>Root cause</dt><dd>In the original compact-signature implementation, the hash-derived challenge was transmitted and checked as a relatively independent signature field. However, the verifier did not sufficiently bind this value to the geometric relation between the reconstructed forward challenge isogeny and the encoded dual path. Consequently, the response and dual-path data could remain unchanged while the transmitted challenge was recomputed for a different message.</dd>
+          <dt>Scope</dt><dd>The remediation was conceptually clear, but it required coordinated changes to the compact signature format and to both signing and verification. It was therefore a moderate implementation change rather than a single additional input check.</dd>
+          <dt>Remediation</dt><dd><p>We have fixed the reported issue by making following changes:</p><ul><li>The compact signature no longer carries the hash-derived challenge as a detached value.</li><li>During signing, the challenge kernel is constructed directly from the hash of the public key, message, and commitment curve using a canonical basis.</li><li>The compact encoding was updated to include the auxiliary information required to reconstruct the commitment curve and challenge relation during verification.</li><li>During verification, the commitment curve is reconstructed from the response and encoded dual-path information.</li><li>The verifier recomputes the challenge for the message being verified, constructs the corresponding forward challenge kernel, and checks that it is compatible with the recovered dual challenge path.</li></ul></dd>
+          <dt>Outcome</dt><dd>These changes bind the message, commitment curve, forward challenge kernel, and dual challenge path within a single verification relation. Changing the message or replacing a challenge value without updating the associated geometric data no longer produces a valid signature.</dd>
+          <dt>Version information</dt><dd>The supplied material does not state the affected version, patched version, commit hash, updated signature size, migration instructions, or formal publication date.</dd>
+          <dt>Source material</dt><dd><a href="修订回复.docx" download>Download the revision-response document</a></dd>
         </dl>
       </div>
     </details>
   </div>
 </section>
-<section><p class="section-index">02</p><h2>勘误</h2><div class="table-wrap"><table><thead><tr><th>编号</th><th>影响版本</th><th>位置</th><th>说明</th><th>状态</th></tr></thead><tbody>
-  <tr><th>sign-25-1</th><td>原未压缩验证实现；具体版本未注明</td><td>二维同源链、余域生成与验证失败处理</td><td>显式传递失败状态，并将关键有效性条件改为无条件运行时检查，避免继续使用不完整的中间值。</td><td><span class="status-tag">已确认并修订</span></td></tr>
-  <tr><th>sign-25-3</th><td>原紧凑签名实现；具体版本未注明</td><td>紧凑签名编码、挑战构造与验证关系</td><td>移除独立挑战字段，重建承诺曲线，并把消息、承诺曲线、正向挑战核和对偶挑战路径绑定到同一验证关系。</td><td><span class="status-tag">已确认并修订</span></td></tr>
-</tbody></table></div><p class="fineprint">以上状态依据现有修订回复材料登记；材料未附对应修订源码、版本号、代码提交、正式发布日期或独立复现实验记录。</p></section></div></main><footer class="site-footer"><div><b>SQIsign2D²</b><p>联合提交团队 · 合肥国家实验室 / 中国科学技术大学 / 兴唐通信科技有限公司</p></div><div><p>联系：xuzheng1@mail.ustc.edu.cn</p><p>最后更新：2026-11-25</p></div></footer></body></html>
+<section><p class="section-index">02</p><h2>Errata register</h2><div class="table-wrap"><table><thead><tr><th>Issue</th><th>Affected material</th><th>Area</th><th>Remediation</th><th>Status</th></tr></thead><tbody>
+  <tr><th>sign-25-1</th><td>Original uncompressed verification implementation; version not stated</td><td>Dimension-two isogeny chain, codomain production, and verification failure handling</td><td>Return and check an explicit failure status, enforce the required validity conditions at runtime, and prevent verification from continuing with incomplete intermediate values.</td><td><span class="status-tag">Confirmed and fixed</span></td></tr>
+  <tr><th>sign-25-3</th><td>Original compact-signature implementation; version not stated</td><td>Compact encoding, challenge construction, and the verification relation</td><td>Remove the detached challenge value, reconstruct the commitment curve, recompute the message challenge, and bind the forward challenge kernel to the recovered dual challenge path.</td><td><span class="status-tag">Confirmed and fixed</span></td></tr>
+</tbody></table></div><p class="fineprint">Status is recorded from the supplied revision-response document. No patched source archive, version identifiers, commit hashes, formal publication dates, or independent reproduction records were supplied with it.</p></section></div></main><footer class="site-footer"><div><b>SQIsign2D²</b><p>联合提交团队 · 合肥国家实验室 / 中国科学技术大学 / 兴唐通信科技有限公司</p></div><div><p>联系：xuzheng1@mail.ustc.edu.cn</p><p>最后更新：2026-11-25</p></div></footer></body></html>
